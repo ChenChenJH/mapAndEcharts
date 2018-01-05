@@ -1,0 +1,54 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+      body,html,#container{
+        height:500px;
+		width:500px;
+        margin:50px auto;
+      }
+    </style>
+    <title>快速入门</title>
+  </head>
+  <body>
+    <div id="container" ></div>
+    <input type="button" value="显示地图" onClick="init()" />
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=3666544e813607f9b177c56dc45204e7"></script>
+    <script type="text/javascript">
+        var map = new AMap.Map('container',{
+            resizeEnable: true,
+            zoom: 17,
+            center: [113.35269,22.121523]
+        });
+		var marker = new AMap.Marker({
+   		 	position: [113.35269,22.121523],//marker所在的位置
+  			 map:map//创建时直接赋予map属性
+		});
+		AMap.plugin(['AMap.ToolBar','AMap.OverView','AMap.AdvancedInfoWindow','AMap.MapType'],function(){
+			//创建并添加工具条控件
+			var toolBar = new AMap.ToolBar();
+			map.addControl(toolBar);
+			//鹰眼
+			 map.addControl(new AMap.OverView({isOpen:true}));
+			 //类别切换
+			 map.addControl(new AMap.MapType());
+			//创建高级信息窗体并在指定位置打开
+			/*var infowindow = new AMap.AdvancedInfoWindow({
+			  offset: new AMap.Pixel(0, -30)
+			});
+			infowindow.open(map,[113.35269,22.121523]);*/
+		})
+		function init(){
+        var map = new AMap.Map('container', {
+            center: [113.35269,22.121523],
+            zoom: 17
+        });
+        map.plugin(["AMap.ToolBar"], function() {
+            map.addControl(new AMap.ToolBar());
+        });
+    }
+    </script>
+  </body>
+</html>
