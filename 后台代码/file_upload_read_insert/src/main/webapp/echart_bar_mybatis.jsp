@@ -24,7 +24,7 @@
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
         var xAxisData = ${cjhBar.xAxisData};
-        var seriesData = ${cjhBar.seriesData};
+        var bar_seriesData = ${cjhBar.seriesData};
         // 指定图表的配置项和数据
         var option = {
             title: {
@@ -41,7 +41,7 @@
             series: [{
                 name: '销量',
                 type: 'bar',
-                data: seriesData
+                data: bar_seriesData
             }]
         };
 
@@ -49,29 +49,24 @@
         myChart.setOption(option);
 		
 		//饼图
-		/*   var pie = echarts.init(document.getElementById('pie'));
+		  var pie = echarts.init(document.getElementById('pie'));
+		  var pie_seriesData = ${cjhPie.seriesData};
 		  pie.setOption({
 			 
 			  //设置背景颜色
-			   backgroundColor: '#2c343c',
+			 //  backgroundColor: '#2c343c',
 			   title: {
                 text: '饼图示例',
-                subtext:'副标题',
                 textStyle:{
                 	color:'	#FF4500'
                  	},
-                subtextStyle:{
-                 	color:'#F4A460'
-                 }
             	},
             	//提示框
-            	tooltip:{
-            		
-            	},
+            	tooltip:{},
 
             	//图例
             	legend: {
-                	data:['访问来源'],
+                	data:['半年产量'],
                 	textStyle:{
                 		color:'#FF4500'
                  	},
@@ -85,20 +80,14 @@
 				},
 				series : [
 					{
-						name: '访问来源',
+						name: '半年产量',
 						type: 'pie',
 						radius: '55%',
 						roseType: true,
-						data:[
-							{value:235, name:'视频广告'},
-							{value:274, name:'联盟广告'},
-							{value:310, name:'邮件营销'},
-							{value:335, name:'直接访问'},
-							{value:400, name:'搜索引擎'}
-						]
+						data:pie_seriesData
 					}
 				]
-			}) */
+			}) 
     </script>
 </body>
 </html>

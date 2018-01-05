@@ -6,6 +6,18 @@ public class Good {
 	private Integer num;
 	private String proTime;
 
+	
+	public Good() {
+		super();
+	}
+
+	public Good(String name, Integer num, String proTime) {
+		super();
+		this.name = name;
+		this.num = num;
+		this.proTime = proTime;
+	}
+
 	public Integer getId() {
 		return id;
 	}
