@@ -54,9 +54,14 @@
 				series: [{
 					// 根据名字对应到相应的系列
 					name: '销量',
-					data: data.data
+					data: data.data,
 				}]
 			});
+		});
+
+		// 处理点击事件并且跳转到相应的百度搜索页面
+		myChart.on('click', function (params) {
+		    window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
 		});
     </script>
 </body>

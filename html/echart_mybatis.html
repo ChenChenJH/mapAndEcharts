@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>echarts_mybatis</title>
+ <!-- 引入 ECharts 文件 -->
+    <script src="js/echarts.min.js"></script>
+</head>
+
+<body>
+  <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="line" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        //默认使用canvas渲染器
+        var myChart = echarts.init(document.getElementById('main'));
+		//var myChart = echarts.init(document.getElementById('main'),null, {renderer: 'svg'});
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            color:['#9370DB'],
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                 name:'衣物',
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+            },
+            yAxis: {name:'销量'},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);	
+
+        //折线图
+         var line = echarts.init(document.getElementById('line'));
+         var lineOption = {
+            legend: {
+                data:['高度(km)与气温(°C)变化关系']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            //是否启用拖拽重计算特性
+            calculable : true,
+            tooltip : {
+                trigger: 'axis',
+                formatter: "Temperature : <br/>{b}km : {c}°C"
+            },
+            xAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value} °C'
+                    }
+                }
+            ],
+            yAxis : [
+                {
+
+                    type : 'category',
+                    axisLine : {onZero: false},
+                    axisLabel : {
+                        formatter: '{value} km'
+                    },
+                    boundaryGap : false,
+                    data : ['0', '10', '20', '30', '40', '50', '60', '70', '80']
+                }
+            ],
+            series : [
+                {
+                    name:'高度(km)与气温(°C)变化关系',
+                    type:'line',
+                    smooth:true,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                shadowColor : 'rgba(0,0,0,0.4)'
+                            }
+                        },
+                        emphasis:{
+                            color:['#9400D3'],
+                        }
+                    },
+                    data:[15, -50, -56.5, -46.5, -22.1, -2.5, -27.7, -55.7, -76.5]
+                }
+            ]
+        };
+         line.setOption(lineOption); 
+    </script>
+</body>
+</html>

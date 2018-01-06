@@ -13,8 +13,9 @@
     <div id="pie" style="width: 600px;height:400px;"></div>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
+        //默认使用canvas渲染器
         var myChart = echarts.init(document.getElementById('main'));
-		
+		//var myChart = echarts.init(document.getElementById('main'),null, {renderer: 'svg'});
         // 指定图表的配置项和数据
         var option = {
             title: {
@@ -40,13 +41,16 @@
 		
 		//饼图
 		  var pie = echarts.init(document.getElementById('pie'));
-		  pie.setOption({
-			 
-			  //设置背景颜色
-			   backgroundColor: '#2c343c',
+		  var option2 = {
+		  	 //设置背景颜色
+			  // backgroundColor: '#2c343c',
 			   title: {
                 text: '饼图示例'
             	},
+            	 tooltip: {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
 				//鼠标移上去的出现阴影
 				itemStyle: {
 					emphasis: {
@@ -69,7 +73,17 @@
 						]
 					}
 				]
-			})
+		 	 };
+		  pie.setOption(option2);
+
+		  // 处理点击事件并且跳转到相应的百度搜索页面
+			pie.on('click', function (params) {
+			   // 显示 tooltip
+			    pie.dispatchAction({
+			        type: 'showTip',
+			        seriesIndex: 0,
+			    });
+			});
     </script>
 </body>
 </html>
