@@ -16,23 +16,6 @@ Date: 2018-01-05 11:37:24
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `student`
--- ----------------------------
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of student
--- ----------------------------
-INSERT INTO `student` VALUES ('1', 'chen', '男');
-INSERT INTO `student` VALUES ('2', 'wang', '女');
-
--- ----------------------------
 -- Table structure for `tb_good`
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_good`;

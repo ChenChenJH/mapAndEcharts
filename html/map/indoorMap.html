@@ -1,0 +1,45 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style type="text/css">
+      body,html,#container{
+        height:600px;
+		    width:700px;
+        margin:50px auto;
+      }
+    </style>
+    <title>室内地图</title>
+  </head>
+  <body>
+  <input type="button" value="异步显示地图" onClick="init()" />
+    <div id="container" ></div>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=3666544e813607f9b177c56dc45204e7"></script>
+    <script type="text/javascript">
+		var map = new AMap.Map('container', {
+     	 resizeEnable: true,
+     	 center:[116.519942, 39.924677],
+     	 zoom:18
+		});
+		var marker = new AMap.Marker({
+    position: [116.519942, 39.924677],//marker所在的位置
+    map:map//创建时直接赋予map属性
+});
+//也可以在创建完成后通过setMap方法执行地图对象
+//marker.setMap(map);
+
+  //异步加载地图
+    function init(){
+         map = new AMap.Map('container', {
+            center: [113.35269,22.121523],
+            zoom: 17
+        });
+         //加载提示插件
+        map.plugin(["AMap.ToolBar"], function() {
+            map.addControl(new AMap.ToolBar());
+        });
+    }
+    </script>
+  </body>
+</html>

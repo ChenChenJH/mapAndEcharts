@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>高德地图定位</title>
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.4.3&key=2e3a260ea2d0ec2a0565fb8b80ff1c76&plugin=AMap.Autocomplete"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+<body>
+  <p>
+  <label>输入地址：</label><input type="text" id="tipinput"/><br/>
+  <label>经度：</label><input type="text" id="lng"/><br/>
+  <label>纬度：</label><input type="text" id="lat"/><br/>
+  <input type="button" value="自动定位" /> <input type="button" value="输入经纬度定位" onclick="searchByLngLat()"/>
+  </p>
+  <div id="container" style="width:600px;height:600px;margin:0 auto;"></div>
+  <script type="text/javascript">
+    //经度
+    var lng = document.getElementById("lng");
+    //纬度
+    var lat = document.getElementById("lat");
+    //创建地图
+    var map = new AMap.Map("container", {
+      resizeEnable: true,
+      zoom: 15,
+      center: [113.35269,22.121523],
+    });
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    var clickEventListener = map.on('click', function(e) {
+        lng.value = e.lnglat.getLng();
+        lat.value = e.lnglat.getLat();
+    });
+
+    //标注
+    var marker = null;
+     //绑定输入地址框自动搜索
+    var auto = new AMap.Autocomplete({
+        input: "tipinput"
+    });
+     AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+    function select(e) {
+          if (e.poi && e.poi.location) {
+              map.setZoom(15);
+              map.setCenter(e.poi.location);
+              marker = new AMap.Marker({
+                position:e.poi.location,//marker所在的位置
+                map:map  //创建时直接赋予map属性
+              });
+            lng.value=e.poi.location.getLng();
+            lat.value=e.poi.location.getLat();
+          }
+    }
+    function  searchByLngLat(){
+        document.getElementById("tipinput").value="";
+        map = new AMap.Map("container", {
+            resizeEnable: true,
+            zoom: 15,
+            center: [lng.value,lat.value],
+        });
+        marker = new AMap.Marker({
+            position:new AMap.LngLat(lng.value,lat.value),//marker所在的位置
+            map:map//创建时直接赋予map属性
+        });
+    }
+  </script>
+
+</body>
+</html>
